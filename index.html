@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./assets/dist/css/main.css">
+    <title>Star Wars Galaxy</title>
+</head>
+
+<body ng-app="starWarsGalaxy">
+    <md-content class="md-padding">
+        <md-nav-bar md-selected-nav-item="currentRoute" nav-bar-aria-label="navigation links" md-no-ink-bar="true">
+            <md-nav-item md-nav-sref="people" name="people" value="people">People</md-nav-item>
+            <md-nav-item md-nav-sref="species" name="species" value="species">Species</md-nav-item>
+            <md-nav-item md-nav-sref="vehicles" name="vehicles" value="vehicles">Vehicles</md-nav-item>
+            <md-nav-item md-nav-sref="starships" name="starships" value="starships">Starships</md-nav-item>
+            <md-nav-item md-nav-sref="planets" name="planets" value="planets">Planets</md-nav-item>
+            <md-nav-item md-nav-sref="films" name="films" value="films">Films</md-nav-item>
+        </md-nav-bar>
+        <md-content>
+            <div ui-view></div>
+        </md-content>
+    </md-content>
+    <script src="./assets/dist/js/lib.js"></script>
+    <script src="./assets/dist/js/main.min.js"></script>
+</body>
+
+</html>

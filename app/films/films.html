@@ -1,0 +1,83 @@
+<div class="people-container">
+    <h1 class="heading">Films</h1>
+    <md-button ng-click="toggleLeft()" class="md-raised md-primary show-gt-sm" aria-label="Settings">
+        Click here to open list
+    </md-button>
+    <section layout="row" flex>
+        <md-sidenav class="md-sidenav-left" md-component-id="left"  md-is-locked-open=$mdMedia('gt-sm') md-whiteframe="4">
+            <md-list class="list">
+                <md-list-item ng-show="viewState.showProgressBar">
+                    <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+                </md-list-item>
+                <md-list-item ng-show="!viewState.showProgressBar">
+                    <md-input-container>
+                        <input name="description" placeholder="Search films" ng-model="viewState.searchTerm">
+                    </md-input-container>
+                </md-list-item>
+                <md-list-item ng-class="{'md-active': film.title == viewState.activeFilm.title}" ng-show="!viewState.showProgressBar" ng-repeat="film in viewState.films | filter: viewState.searchTerm"
+                    ng-click="setActiveFilm(film)">
+                    <h3>{{film.title}}</h3>
+                </md-list-item>
+                <md-list-item>
+                    <md-button class="md-raised md-primary" ng-disabled="viewState.prevBtnDisabled" ng-click="getPrevPlanets()">Previous</md-button>
+                    <md-button class="md-raised md-primary" ng-disabled="viewState.nextBtnDisabled" ng-click="getNextPlanets()">Next</md-button>
+                </md-list-item>
+                <md-list-item>
+                   <h4>(Page {{viewState.pageId}} of {{viewState.pageId || viewState.pageNumbers.length}})</h4>
+                </md-list-item>
+            </md-list>
+        </md-sidenav>
+        <md-content flex class="content">
+            <h1 ng-if="viewState.errorMessage">
+                {{viewState.errorMessage}}
+            </h1>
+            <div layout="column" layout-align="top" ng-show="!viewState.showProgressBar && !viewState.errorMessage">
+                <h1>
+                    {{viewState.activeFilm.title}}
+                </h1>
+                <ul class="list-group">
+                    <li class="list-group-item justify-content-between">
+                        Episode number of the film
+                        <span class="badge badge-default badge-info">{{viewState.activeFilm.episode_id}}</span>
+                    </li>
+                    <li class="list-group-item justify-content-between">
+                        Opening paragraphs at the beginning of this film:
+                        <b>{{viewState.activeFilm.opening_crawl}}</b>
+                    </li>
+                    <li class="list-group-item justify-content-between">
+                        Director:
+                        <b>{{viewState.activeFilm.director}}</b>
+                    </li>
+                    <li class="list-group-item justify-content-between">
+                        Producer(s):
+                        <b>{{viewState.activeFilm.producer}}</b>
+                    </li>
+                    <li class="list-group-item justify-content-between">
+                        Release date:
+                        <b>{{viewState.activeFilm.release_date}}</b>
+                    </li>
+                    <li class="list-group-item justify-content-between" ng-if="viewState.activeFilm.species.length > 0">
+                        Total number of species that are in this film:
+                        <span class="badge badge-default badge-info">{{viewState.activeFilm.species.length}}</span>
+                    </li>
+                     <li class="list-group-item justify-content-between" ng-if="viewState.activeFilm.starships.length > 0">
+                        Total number of starships that are in this film:
+                        <span class="badge badge-default badge-info">{{viewState.activeFilm.starships.length}}</span>
+                    </li>
+                    <li class="list-group-item justify-content-between" ng-if="viewState.activeFilm.vehicles.length > 0">
+                        Total number of vehicles that are in this film:
+                        <span class="badge badge-default badge-info">{{viewState.activeFilm.vehicles.length}}</span>
+                    </li>
+                    <li class="list-group-item justify-content-between" ng-if="viewState.activeFilm.characters.length > 0">
+                        Total number of characters that are in this film:
+                        <span class="badge badge-default badge-info">{{viewState.activeFilm.characters.length}}</span>
+                    </li>
+                    <li class="list-group-item justify-content-between" ng-if="viewState.activeFilm.planets.length > 0">
+                        Total number of planets that are in this film:
+                        <span class="badge badge-default badge-info">{{viewState.activeFilm.planets.length}}</span>
+                    </li>
+                </ul>
+            </div>
+        </md-content>
+    </section>
+</div>

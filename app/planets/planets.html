@@ -1,0 +1,78 @@
+<div class="people-container">
+    <h1 class="heading">Planets</h1>
+    <md-button ng-click="toggleLeft()" class="md-raised md-primary show-gt-sm" aria-label="Settings">
+        Click here to open list
+    </md-button>
+    <section layout="row" flex>
+        <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open=$mdMedia('gt-sm') md-whiteframe="4">
+            <md-list class="list">
+                <md-list-item ng-show="viewState.showProgressBar">
+                    <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+                </md-list-item>
+                <md-list-item ng-show="!viewState.showProgressBar">
+                    <md-input-container>
+                        <input name="description" placeholder="Search planets" ng-model="viewState.searchTerm">
+                    </md-input-container>
+                </md-list-item>
+                <md-list-item ng-class="{'md-active': planet.name == viewState.activePlanet.name}" ng-show="!viewState.showProgressBar" ng-repeat="planet in viewState.planets | filter: viewState.searchTerm"
+                    ng-click="setActivePlanet(planet)">
+                    <h3>{{planet.name}}</h3>
+                </md-list-item>
+                <md-list-item>
+                    <md-button class="md-raised md-primary" ng-disabled="viewState.prevBtnDisabled" ng-click="getPrevPlanets()">Previous</md-button>
+                    <md-button class="md-raised md-primary" ng-disabled="viewState.nextBtnDisabled" ng-click="getNextPlanets()">Next</md-button>
+                </md-list-item>
+                <md-list-item>
+                   <h4>(Page {{viewState.pageId}} of {{viewState.pageNumbers.length}})</h4>
+                </md-list-item>
+            </md-list>
+        </md-sidenav>
+        <md-content flex class="content">
+            <h1 ng-if="viewState.errorMessage">
+                {{viewState.errorMessage}}
+            </h1>
+            <div layout="column" layout-align="top" ng-show="!viewState.showProgressBar && !viewState.errorMessage">
+                <h1>
+                    {{viewState.activePlanet.name}}
+                </h1>
+                <ul class="list-group">
+                    <li class="list-group-item justify-content-between">
+                        Diameter of this planet in kilometeres:
+                        <span class="badge badge-default badge-info">{{viewState.activePlanet.diameter}}</span>
+                    </li>
+                    <li class="list-group-item justify-content-between">
+                        Number of standard hours it takes for this planet to complete a single rotation on its axis:
+                        <span class="badge badge-default badge-info">{{viewState.activePlanet.rotation_period}}</span>
+                    </li>
+                    <li class="list-group-item justify-content-between">
+                        Number of standard days it takes for this planet to complete a single orbit of its local star:
+                        <span class="badge badge-default badge-info">{{viewState.activePlanet.orbital_period}}</span>
+                    </li>
+                    <li class="list-group-item justify-content-between">
+                        Gravity of this planet:
+                        <span class="badge badge-default badge-info">{{viewState.activePlanet.gravity}}</span>
+                    </li>
+                    <li class="list-group-item justify-content-between">
+                        Average population of sentient beings inhabiting this planet:
+                        <span class="badge badge-default badge-info">{{viewState.activePlanet.population}}</span>
+                    </li>
+                    <li class="list-group-item justify-content-between">
+                        Terrain of this planet: <b>{{viewState.activePlanet.terrain}}</span></b>
+                    </li>
+                    <li class="list-group-item justify-content-between">
+                        Percentage of the planet surface that is naturally occurring water or bodies of water:
+                        <span class="badge badge-default badge-info">{{viewState.activePlanet.surface_water}}</span>
+                    </li>
+                    <li class="list-group-item justify-content-between" ng-if="viewState.activePlanet.residents.length > 0">
+                        Total number of people that live on this planet:
+                        <span class="badge badge-default badge-info">{{viewState.activePlanet.residents.length}}</span>
+                    </li>
+                    <li class="list-group-item justify-content-between" ng-if="viewState.activePlanet.films.length > 0">
+                        Total number of films that this planet has appeared in:
+                        <span class="badge badge-default badge-info">{{viewState.activePlanet.films.length}}</span>
+                    </li>
+                </ul>
+            </div>
+        </md-content>
+    </section>
+</div>

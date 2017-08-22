@@ -1,0 +1,20 @@
+{
+  "name": "starwars-galaxy",
+  "version": "1.0.0",
+  "description": "Simple AngularJS application to demonstrate REST API interaction and UI practices",
+  "author": "Nirmal Santhosh Avvaru",
+  "license": "ISC",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/niavvaru/starwars-galaxy"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-cssmin": "^2.2.1",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^3.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "lite-server": "^2.3.0"
+  }
+}

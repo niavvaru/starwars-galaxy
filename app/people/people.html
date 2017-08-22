@@ -1,0 +1,83 @@
+<div class="people-container">
+    <h1 class="heading">People</h1>
+    <md-button ng-click="toggleLeft()" class="md-raised md-primary show-gt-sm" aria-label="Settings">
+        Click here to open list
+    </md-button>
+    <section layout="row" flex>
+        <md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="4" md-is-locked-open=$mdMedia('gt-sm')>
+            <md-list class="list">
+                <md-list-item ng-show="viewState.showProgressBar">
+                    <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+                </md-list-item>
+                <md-list-item ng-show="!viewState.showProgressBar">
+                    <md-input-container>
+                        <input name="description" placeholder="Search people" ng-model="viewState.searchTerm">
+                    </md-input-container>
+                </md-list-item>
+                <md-list-item ng-class="{'md-active': person.name == viewState.activePerson.name}" ng-show="!viewState.showProgressBar" ng-repeat="person in viewState.people | filter: viewState.searchTerm"
+                    ng-click="setActivePerson(person)">
+                    <h3>{{person.name}}</h3>
+                </md-list-item>
+                <md-list-item>
+                    <md-button class="md-raised md-primary" ng-disabled="viewState.prevBtnDisabled" ng-click="getPrevPeople()">Previous</md-button>
+                    <md-button class="md-raised md-primary" ng-disabled="viewState.nextBtnDisabled" ng-click="getNextPeople()">Next</md-button>
+                </md-list-item>
+                <md-list-item>
+                    <h4>(Page {{viewState.pageId}} of {{viewState.pageNumbers.length}})</h4>
+                </md-list-item>
+            </md-list>
+        </md-sidenav>
+        <md-content flex class="content">
+            <h1 ng-if="viewState.errorMessage">
+                {{viewState.errorMessage}}
+            </h1>
+            <div layout="column" layout-align="top" ng-show="!viewState.showProgressBar && !viewState.errorMessage">
+                <h1>
+                    {{viewState.activePerson.name}}
+                </h1>
+                <ul class="list-group">
+                    <li class="list-group-item justify-content-between">
+                        Height: <b>{{viewState.activePerson.height}}</b>
+                    </li>
+                    <li class="list-group-item justify-content-between">
+                        Mass: <b>{{viewState.activePerson.mass}}</b>
+                    </li>
+                    <li class="list-group-item justify-content-between">
+                        Hair color: <b>{{viewState.activePerson.hair_color}}</b>
+                    </li>
+                    <li class="list-group-item justify-content-between">
+                        Skin color: <b>{{viewState.activePerson.skin_color}}</b>
+                    </li>
+                    <li class="list-group-item justify-content-between">
+                        Eye color: <b>{{viewState.activePerson.eye_color}}</b>
+                    </li>
+                    <li class="list-group-item justify-content-between">
+                        Birth year: <b>{{viewState.activePerson.birth_year}}</b>
+                    </li>
+                    <li class="list-group-item justify-content-between">
+                        Gender: <b>{{viewState.activePerson.gender}}</b>
+                    </li>
+                    <li class="list-group-item justify-content-between">
+                        Planet {{viewState.activePerson.name}} was born on or inhabits: <b>{{viewState.activePerson.homeworld}}</b>
+                    </li>
+                    <li class="list-group-item justify-content-between" ng-if="viewState.activePerson.films.length > 0">
+                        Total number of films acted
+                        <span class="badge badge-default badge-info">{{viewState.activePerson.films.length}}</span>
+                    </li>
+                    <li class="list-group-item justify-content-between" ng-if="viewState.activePerson.species.length > 0">
+                        Total number of species {{viewState.activePerson.name}} belongs to
+                        <span class="badge badge-default badge-info">{{viewState.activePerson.species.length}}</span>
+                    </li>
+                    <li class="list-group-item justify-content-between" ng-if="viewState.activePerson.starships.length > 0">
+                        Total number of starships {{viewState.activePerson.name}} has piloted
+                        <span class="badge badge-default badge-info">{{viewState.activePerson.starships.length}}</span>
+                    </li>
+                    <li class="list-group-item justify-content-between" ng-if="viewState.activePerson.vehicles.length > 0">
+                        Total number of vehicles {{viewState.activePerson.name}} has piloted
+                        <span class="badge badge-default badge-info">{{viewState.activePerson.vehicles.length}}</span>
+                    </li>
+                </ul>
+            </div>
+        </md-content>
+    </section>
+</div>
