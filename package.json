@@ -1,7 +1,7 @@
 {
   "name": "starwars-galaxy",
   "version": "1.0.0",
-  "description": "Simple AngularJS application to demonstrate REST API interaction and UI practices",
+  "description": "Simple AngularJS application to demonstrate REST API interaction and responsive UI practices",
   "author": "Nirmal Santhosh Avvaru",
   "license": "ISC",
   "repository": {
